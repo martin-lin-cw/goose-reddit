@@ -35,3 +35,24 @@
      - CreateComment
      - UpdateComment
      - DeleteComment
+
+## Create migration SQL file
+
+create a migration SQL file by<br>
+`goose create file_name sql`
+
+put SQL below `-- +goose Up` for migrate up<br>
+put SQL below `-- +goose Down` for migrate down
+
+for example:<br>
+create the TABLE post when migrate up<br>
+drop the TABLE post when migrate down
+
+```sql
+-- +goose Up
+CREATE TABLE post(
+   id BIGINT(20) PRIMARY KEY
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- +goose Down
+DROP TABLE post;
+```
