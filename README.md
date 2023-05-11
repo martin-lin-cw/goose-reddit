@@ -83,3 +83,47 @@ check migration status, CMD=status
 ```console
 goose mysql "user:password@tcp(localhost:3306)/dbname?parseTime=true" status
 ```
+
+## Implements store interface inside mysql package
+
+1. Install sqlx with
+
+   ```console
+   go get github.com/jmoiron/sqlx
+   ```
+
+2. Implement ThreadStore, PostStore, and CommentStore with mySql. Then use Store to merge every single store.
+
+3. Create and connect db with sqlx
+
+   ```go
+   func NewStore(dataSourceName string) (*Store, error) {
+      db, err := sqlx.Open("mysql", dataSourceName)
+      if err != nil {
+         return nil, fmt.Errorf("error opening database: %w", err)
+      }
+      if err := db.Ping(); err != nil {
+         return nil, fmt.Errorf("error connecting to database: %w", err)
+      }
+      return &Store{
+         ThreadStore:  NewThreadStore(db),
+         PostStore:    NewPostStore(db),
+         CommentStore: NewCommentStore(db),
+      }, nil
+   }
+   ```
+
+4. Install dependency lib for mySql driver
+
+   ```console
+   $ go get -u github.com/go-sql-driver/mysql
+   ```
+
+   and import in store
+
+   ```go
+   import (
+      "github.com/jmoiron/sqlx"
+      _ "github.com/go-sql-driver/mysql"
+   )
+   ```

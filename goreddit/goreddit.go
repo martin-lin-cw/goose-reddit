@@ -44,3 +44,9 @@ type CommentStore interface {
 	UpdateComment(c *Comment) error
 	DeleteComment(id int64) error
 }
+
+type Store interface {
+	ThreadStore
+	PostStore
+	CommentStore
+}
