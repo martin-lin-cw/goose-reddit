@@ -56,3 +56,30 @@ CREATE TABLE post(
 -- +goose Down
 DROP TABLE post;
 ```
+
+## Using goose to migrate
+
+goose syntax `goose DRIVER DBSTRING CMD`
+
+for this example:
+
+- dirver=mysql
+- dbsrting="user:password@tcp(localhost:3306)/dbname?parseTime=true"
+
+migrate up, CMD=up<br>
+
+```console
+goose mysql "user:password@tcp(localhost:3306)/dbname?parseTime=true" up
+```
+
+migrate down, CMD=down<br>
+
+```console
+goose mysql "user:password@tcp(localhost:3306)/dbname?parseTime=true" dwon
+```
+
+check migration status, CMD=status
+
+```console
+goose mysql "user:password@tcp(localhost:3306)/dbname?parseTime=true" status
+```
