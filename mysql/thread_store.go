@@ -19,7 +19,7 @@ type ThreadStore struct {
 
 func (s *ThreadStore) Thread(id int64) (goreddit.Thread, error) {
 	var t goreddit.Thread
-	if err := s.Get(&t, `SELECT * FROM thread WHERE id = $1`, id); err != nil {
+	if err := s.Get(&t, `SELECT * FROM thread WHERE id = ?`, id); err != nil {
 		return goreddit.Thread{}, fmt.Errorf("error getting thread: %w", err)
 	}
 	return t, nil

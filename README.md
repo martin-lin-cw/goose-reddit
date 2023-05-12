@@ -127,3 +127,14 @@ goose mysql "user:password@tcp(localhost:3306)/dbname?parseTime=true" status
       _ "github.com/go-sql-driver/mysql"
    )
    ```
+
+## Install gorilla mux router
+
+```console
+$ go get -u github.com/gin-gonic/gin
+```
+
+## References
+
+- https://youtube.com/playlist?list=PLj8CKwvX6i6b6avGkK_YI5diij73D_NoT
+- https://youtube.com/playlist?list=PL3eAkoh7fypr8zrkiygiY1e9osoqjoV9w
